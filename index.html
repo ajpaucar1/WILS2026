@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>WILS 2026 · Agenda</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0d2240; --navy2:#15315d; --blue:#2657a0; --cyan:#2fd6e8; --yellow:#f5b800;
+  --bg:#eef2f8; --card:#ffffff; --text:#14213a; --muted:#5b6577; --line:#d9e1ee;
+  --charla:#2657a0; --taller:#7a4cc2; --empresa:#12868a; --foro:#c2410c; --feria:#0e9f6e; --carros:#d97706; --log:#64748b;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0a1424; --card:#13213a; --text:#e8eef8; --muted:#9fb0c8; --line:#22355a;
+  }
+}
+:root[data-theme="dark"]{ --bg:#0a1424; --card:#13213a; --text:#e8eef8; --muted:#9fb0c8; --line:#22355a; }
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--text);font-family:'Poppins',system-ui,sans-serif;font-size:15px;line-height:1.45;-webkit-tap-highlight-color:transparent}
+.wrap{max-width:720px;margin:0 auto;padding:0 16px 40px}
+header.hero{background:radial-gradient(120% 140% at 85% -10%,#2a6fd1 0%,#15315d 45%,#0b1a33 100%);color:#fff;padding:22px 16px 26px;position:relative;overflow:hidden}
+header.hero::after{content:"";position:absolute;right:-40px;top:-40px;width:180px;height:180px;border-radius:50%;border:2px solid rgba(47,214,232,.35);box-shadow:0 0 0 22px rgba(47,214,232,.08),0 0 0 48px rgba(47,214,232,.05)}
+.hero .in{max-width:720px;margin:0 auto;position:relative;z-index:1}
+.kicker{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);font-weight:600}
+.hero h1{font-size:34px;line-height:1;margin:6px 0 2px;font-weight:800;letter-spacing:-.01em}
+.hero h1 span{color:var(--yellow)}
+.hero .sub{font-size:13px;opacity:.9;margin:0}
+.hero .meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.chip{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 11px;font-size:12px;font-weight:500}
+.now{margin:-16px auto 0;position:relative;z-index:2;background:var(--card);border-radius:16px;box-shadow:0 10px 30px rgba(13,34,64,.15);padding:14px 16px;border:1px solid var(--line)}
+.now .lab{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.now .row{display:flex;gap:12px;align-items:flex-start;margin-top:6px}
+.now .dot{width:10px;height:10px;border-radius:50%;background:#e11d48;margin-top:7px;flex:none;box-shadow:0 0 0 0 rgba(225,29,72,.6);animation:pulse 1.6s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(225,29,72,0)}100%{box-shadow:0 0 0 0 rgba(225,29,72,0)}}
+.now .t{font-weight:600;font-size:15px}
+.now .s{font-size:13px;color:var(--muted)}
+.now .next{border-top:1px dashed var(--line);margin-top:10px;padding-top:8px;font-size:13px}
+.now .next b{font-weight:600}
+.quick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0 6px}
+.qa{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 4px;text-align:center;font-size:11.5px;font-weight:500;color:var(--text);text-decoration:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:5px}
+.qa svg{width:22px;height:22px}
+.qa.off{opacity:.55}
+.tabs{display:flex;gap:6px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:5px;margin:14px 0 10px;position:sticky;top:8px;z-index:5}
+.tab{flex:1;border:0;background:transparent;color:var(--muted);font:600 13.5px 'Poppins',sans-serif;padding:9px 6px;border-radius:10px;cursor:pointer}
+.tab.on{background:var(--navy2);color:#fff}
+.filters{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;margin-bottom:8px;scrollbar-width:none}
+.filters::-webkit-scrollbar{display:none}
+.f{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;padding:5px 12px;font:500 12px 'Poppins',sans-serif;white-space:nowrap;cursor:pointer}
+.f.on{background:var(--text);color:var(--card);border-color:var(--text)}
+.list{display:flex;flex-direction:column;gap:8px}
+.item{display:flex;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;cursor:pointer;position:relative;text-align:left;width:100%;font:inherit;color:inherit}
+.item.live{border-color:#e11d48;box-shadow:0 0 0 2px rgba(225,29,72,.15)}
+.item.past{opacity:.6}
+.time{flex:none;width:54px;font-weight:700;font-size:14px;line-height:1.15}
+.time small{display:block;font-weight:500;color:var(--muted);font-size:11.5px}
+.bar{flex:none;width:4px;border-radius:4px}
+.body{flex:1;min-width:0}
+.tag{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:2px 8px;border-radius:999px;color:#fff;margin-bottom:4px}
+.ttl{font-weight:600;font-size:14.5px;line-height:1.3}
+.who{font-size:12.5px;color:var(--muted);margin-top:2px}
+.star{position:absolute;right:8px;top:8px;border:0;background:transparent;cursor:pointer;padding:4px;color:var(--muted)}
+.star.on{color:var(--yellow)}
+.star svg{width:20px;height:20px}
+.par{font-size:12px;color:var(--muted);margin-top:4px}
+.live-pill{display:inline-block;background:#e11d48;color:#fff;font-size:10px;font-weight:700;padding:1px 7px;border-radius:999px;margin-left:6px;vertical-align:2px}
+.cert{background:linear-gradient(135deg,var(--navy2),#0b1a33);color:#fff;border-radius:16px;padding:16px;margin:18px 0 8px}
+.cert h2{margin:0 0 4px;font-size:17px}
+.cert p{margin:0 0 10px;font-size:13px;opacity:.9}
+.req{display:flex;flex-direction:column;gap:7px}
+.rq{display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.08);border-radius:10px;padding:8px 10px;font-size:13px;cursor:pointer;border:0;color:#fff;text-align:left;font-family:inherit;width:100%}
+.ck{width:20px;height:20px;border-radius:6px;border:2px solid var(--cyan);flex:none;display:grid;place-items:center}
+.rq.done .ck{background:var(--cyan)}
+.rq.done .ck::after{content:"";width:9px;height:5px;border-left:2px solid var(--navy);border-bottom:2px solid var(--navy);transform:rotate(-45deg) translate(1px,-1px)}
+.progress{height:6px;background:rgba(255,255,255,.15);border-radius:6px;margin-top:10px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--yellow);width:0;transition:width .3s}
+.note{font-size:11.5px;opacity:.75;margin-top:8px}
+.sect{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:22px 0 8px}
+.info{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;font-size:13.5px}
+.info p{margin:0 0 8px}.info p:last-child{margin:0}
+footer{font-size:11.5px;color:var(--muted);text-align:center;margin-top:24px}
+/* hoja de detalle */
+.sheet-bg{position:fixed;inset:0;background:rgba(5,12,25,.55);opacity:0;pointer-events:none;transition:opacity .2s;z-index:20}
+.sheet-bg.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;left:0;right:0;bottom:0;max-width:720px;margin:0 auto;background:var(--card);border-radius:20px 20px 0 0;padding:10px 18px 24px;transform:translateY(105%);transition:transform .25s ease;z-index:21;max-height:88vh;overflow:auto}
+.sheet.on{transform:none}
+.grab{width:40px;height:4px;background:var(--line);border-radius:4px;margin:4px auto 12px}
+.sheet h3{margin:4px 0 4px;font-size:19px;line-height:1.25}
+.sheet .when{font-size:13px;color:var(--muted)}
+.spk{display:flex;gap:12px;align-items:center;margin:14px 0 8px}
+.av{width:58px;height:58px;border-radius:50%;flex:none;display:grid;place-items:center;color:#fff;font-weight:700;font-size:19px;background:var(--blue);overflow:hidden}
+.av img{width:100%;height:100%;object-fit:cover}
+.spk b{display:block;font-size:14.5px}.spk span{font-size:12.5px;color:var(--muted)}
+.desc{font-size:14px;margin:10px 0}
+.pan{margin:8px 0 0;padding-left:18px;font-size:13.5px}
+.btn{display:flex;justify-content:center;align-items:center;gap:8px;width:100%;border:0;border-radius:12px;padding:13px;font:600 14.5px 'Poppins',sans-serif;cursor:pointer;margin-top:10px;text-decoration:none}
+.btn.pri{background:var(--yellow);color:#14213a}
+.btn.dis{background:var(--line);color:var(--muted);cursor:default}
+.btn.sec{background:transparent;border:1px solid var(--line);color:var(--text)}
+.hint{font-size:12px;color:var(--muted);text-align:center;margin-top:6px}
+.toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%) translateY(120px);background:var(--navy2);color:#fff;padding:10px 16px;border-radius:12px;font-size:13px;transition:transform .25s;z-index:30;max-width:90%}
+.toast.on{transform:translateX(-50%)}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="in">
+    <div class="kicker">IEEE ComSoc ESPE · Congreso Nacional</div>
+    <h1>WILS <span>2026</span></h1>
+    <p class="sub">IEEE ComSoc Wireless Innovation &amp; Leadership Summit</p>
+    <div class="meta">
+      <span class="chip">26 y 27 de noviembre</span>
+      <span class="chip">Coliseo GRAD. Miguel G. Iturralde · ESPE</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="now" id="now" aria-live="polite"></section>
+
+  <nav class="quick" id="quick"></nav>
+
+  <div class="tabs" role="tablist">
+    <button class="tab" data-day="1" role="tab">Jueves 26</button>
+    <button class="tab" data-day="2" role="tab">Viernes 27</button>
+    <button class="tab" data-day="fav" role="tab">Mi agenda</button>
+  </div>
+  <div class="filters" id="filters"></div>
+  <div class="list" id="list"></div>
+
+  <section class="cert" id="cert"></section>
+
+  <div class="sect">¿Cómo registro mi asistencia?</div>
+  <div class="info">
+    <p><b>Charlas, talleres y foro:</b> al terminar cada actividad se muestra un código en la pantalla del escenario. Abre la actividad en esta agenda, toca <b>Registrar mi asistencia</b> e ingresa tu cédula y el código.</p>
+    <p><b>Feria tecnológica:</b> cada stand tiene su propio código. Pídelo al equipo que te atendió y regístralo en la actividad “Feria tecnológica”.</p>
+    <p><b>Competencia Wireless Car:</b> el código se anuncia por micrófono durante la competencia, el jueves y el viernes.</p>
+  </div>
+
+  <div class="sect">Comparte el evento</div>
+  <div class="info">
+    <p>Sube tus fotos a Instagram con <b>#WILS2026</b> y etiqueta a <b>@ieee.espe.comsoc</b>. ¡Compartiremos las mejores!</p>
+  </div>
+
+  <footer>Agenda preliminar, sujeta a cambios · IEEE ComSoc ESPE · Con el apoyo de IEEE ComSoc Ecuador</footer>
+</div>
+
+<div class="sheet-bg" id="bg"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===== Configuración: enlaces que se completan cuando estén listos ===== */
+const LINKS = {
+  registro: "",      // Formulario de registro en el evento (Google Forms)
+  asistencia: "",    // Formulario de asistencia por actividad (Google Forms)
+  whatsapp: "",      // Comunidad de WhatsApp de asistentes
+  instagram: "https://www.instagram.com/ieee.espe.comsoc",
+  linktree: "https://linktr.ee/ieee.espe.comsoc"
+};
+/* Para precargar la actividad en el formulario de asistencia: id del campo "Actividad" (entry.XXXX) */
+const ASIST_ENTRY = "";
+
+const TYPES = {
+  charla:{n:"Charla",c:"var(--charla)"}, taller:{n:"Taller",c:"var(--taller)"}, empresa:{n:"Empresa",c:"var(--empresa)"},
+  foro:{n:"Foro",c:"var(--foro)"}, feria:{n:"Feria",c:"var(--feria)"}, carros:{n:"Wireless Car",c:"var(--carros)"}, log:{n:"General",c:"var(--log)"}
+};
+
+/* d: día (1 = jueves 26, 2 = viernes 27); reg: se registra asistencia */
+const EV = [
+ {id:"j-reg",d:1,s:"07:00",e:"08:00",t:"log",ti:"Registro y entrega de kits",par:"Pista: revisión técnica de carros · Feria: montaje de stands"},
+ {id:"j-ina",d:1,s:"08:00",e:"08:15",t:"log",ti:"Inauguración"},
+ {id:"j-c1",d:1,s:"08:15",e:"08:45",t:"charla",ti:"Proyecto estudiantil",sp:"Salma Villegas",reg:1},
+ {id:"j-c2",d:1,s:"08:45",e:"09:15",t:"charla",ti:"Charla por confirmar",sp:"Por confirmar",reg:1,tbc:1},
+ {id:"j-c3",d:1,s:"09:15",e:"10:00",t:"charla",ti:"Evolución de las Redes Móviles: Tecnología, Talento e Inversión",sp:"Javier Cadena",reg:1},
+ {id:"j-t1",d:1,s:"10:00",e:"10:45",t:"taller",ti:"Taller de Habilidades Blandas",sp:"Ing. Paola Suárez",reg:1,key:1},
+ {id:"j-cof",d:1,s:"10:45",e:"11:00",t:"log",ti:"Coffee break"},
+ {id:"j-c4",d:1,s:"11:00",e:"11:30",t:"empresa",ti:"Charla de E-Open Solutions",sp:"E-Open Solutions",reg:1},
+ {id:"j-c5",d:1,s:"11:30",e:"12:00",t:"charla",ti:"3 ms para no quedarse a oscuras",sp:"Hugo Pozo",reg:1},
+ {id:"j-c6",d:1,s:"12:00",e:"12:30",t:"empresa",ti:"Charla de FIBRAMAX",sp:"FIBRAMAX · 2 ponentes",reg:1},
+ {id:"j-fer",d:1,s:"08:00",e:"13:00",t:"feria",ti:"Feria Tecnológica IEEE TechDefense II",par:"9 proyectos universitarios y stands de empresas",reg:1,feria:1},
+ {id:"j-alm",d:1,s:"12:30",e:"14:00",t:"log",ti:"Almuerzo",par:"Pista: pruebas libres de 12:30 a 13:30"},
+ {id:"j-car",d:1,s:"14:00",e:"17:30",t:"carros",ti:"Competencia Wireless Car: clasificatorias",par:"Vehículos a escala controlados de forma inalámbrica",reg:1,car:1},
+ {id:"j-fin",d:1,s:"17:30",e:"17:45",t:"log",ti:"Cierre del día"},
+
+ {id:"v-reg",d:2,s:"07:30",e:"08:00",t:"log",ti:"Registro y entrada de asistentes",par:"Feria: montaje de stands"},
+ {id:"v-bie",d:2,s:"08:00",e:"08:05",t:"log",ti:"Bienvenida al segundo día"},
+ {id:"v-c1",d:2,s:"08:05",e:"08:35",t:"charla",ti:"Charla por confirmar",sp:"Por confirmar",reg:1,tbc:1},
+ {id:"v-c2",d:2,s:"08:35",e:"09:00",t:"charla",ti:"Charla del Coronel Rommel Torres",sp:"Coronel Rommel Torres",reg:1},
+ {id:"v-c3",d:2,s:"09:00",e:"09:45",t:"empresa",ti:"Charla de Ciemtelcom (título por confirmar)",sp:"Diego Loor · Ciemtelcom",reg:1},
+ {id:"v-c4",d:2,s:"09:45",e:"10:45",t:"empresa",ti:"Charla de Complementos Electrónicos",sp:"Complementos Electrónicos",reg:1},
+ {id:"v-fer",d:2,s:"08:00",e:"13:00",t:"feria",ti:"Feria Tecnológica IEEE TechDefense II",par:"Evaluación del jurado en los stands de 08:30 a 10:45",reg:1,feria:1},
+ {id:"v-pit",d:2,s:"10:45",e:"11:30",t:"feria",ti:"Pitch de los proyectos de la feria + coffee break",par:"9 proyectos · 4 minutos cada uno"},
+ {id:"v-c5",d:2,s:"11:30",e:"12:00",t:"empresa",ti:"Charla de ZTE",sp:"Sebastián Santín · ZTE",reg:1},
+ {id:"v-for",d:2,s:"12:00",e:"13:00",t:"foro",ti:"Leadership Forum: Connect, Inspire, Lead: Building the Next Generation of ComSoc Leaders",sp:"Panel de líderes IEEE y de la industria",reg:1,key:1,
+   panel:["Román Lara-Cueva · Chair, IEEE ComSoc Ecuador","Daniela Egas · Presidenta, IEEE ComSoc ESPE","Lady Pasquel · Líder WICE, Women in Communications Engineering","Steven Vinueza · Líder profesional de capítulo estudiantil","Celeste Santander · Líder YP, Young Professionals","Jefferson Loor · Representante de la industria","Gisel Custodio · Moderadora, Community Manager IEEE ComSoc Ecuador"]},
+ {id:"v-alm",d:2,s:"13:00",e:"14:30",t:"log",ti:"Almuerzo",par:"Pista: pruebas libres"},
+ {id:"v-car",d:2,s:"14:30",e:"16:30",t:"carros",ti:"Competencia Wireless Car: repechaje y gran final",reg:1,car:1},
+ {id:"v-pre",d:2,s:"16:30",e:"17:15",t:"log",ti:"Premiación y clausura",par:"Wireless Car, feria, reconocimientos a ponentes y aliados"}
+];
+/* Biografías y fotos de ponentes: se completan aquí cuando lleguen (foto como data URI) */
+const BIO = {};
+
+const DATES = {1:"2026-11-26",2:"2026-11-27"};
+const $ = s => document.querySelector(s);
+const store = {
+  get(k,d){try{const v=localStorage.getItem("wils26-"+k);return v?JSON.parse(v):d}catch(e){return d}},
+  set(k,v){try{localStorage.setItem("wils26-"+k,JSON.stringify(v))}catch(e){}}
+};
+let favs = new Set(store.get("favs",[]));
+let done = store.get("done",{});
+let day = store.get("day",null);
+let filter = "todo";
+
+/* Hora de Ecuador (UTC-5). #demo1 / #demo2 simulan el jueves o viernes a las 10:20 */
+function nowEC(){
+  const h = location.hash.replace("#","");
+  if(h==="demo1") return new Date("2026-11-26T10:20:00-05:00");
+  if(h==="demo2") return new Date("2026-11-27T11:40:00-05:00");
+  return new Date();
+}
+const at = (d,hm) => new Date(DATES[d]+"T"+hm+":00-05:00");
+const startOf = e => at(e.d,e.s), endOf = e => at(e.d,e.e);
+const sorted = arr => arr.slice().sort((a,b)=>startOf(a)-startOf(b) || (a.feria?1:0)-(b.feria?1:0));
+const main = EV.filter(e=>!e.feria);
+
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function initials(n){return n.replace(/^(Ing\.|Dr\.|Coronel)\s*/,"").split(/\s+/).filter(Boolean).slice(0,2).map(w=>w[0]).join("").toUpperCase()}
+
+/* ===== Ahora / a continuación ===== */
+function renderNow(){
+  const n = nowEC(), el = $("#now");
+  const first = at(1,"07:00"), last = at(2,"17:15");
+  if(n < first){
+    const days = Math.ceil((first - n)/86400000);
+    el.innerHTML = `<div class="lab">Cuenta regresiva</div><div class="row"><div><div class="t">${days<=1?"¡Mañana empieza el WILS 2026!":"Faltan "+days+" días para el WILS 2026"}</div><div class="s">Jueves 26 de noviembre · Registro desde las 07:00</div></div></div>`;
+    return;
+  }
+  if(n > last){
+    el.innerHTML = `<div class="lab">WILS 2026</div><div class="row"><div><div class="t">¡Gracias por ser parte del WILS 2026!</div><div class="s">Los certificados se enviarán a tu correo.</div></div></div>`;
+    return;
+  }
+  const live = sorted(main).filter(e=>startOf(e)<=n && n<endOf(e));
+  const nxt = sorted(main).find(e=>startOf(e)>n);
+  const fav = sorted(EV.filter(e=>favs.has(e.id))).find(e=>startOf(e)>n);
+  const cur = live[live.length-1];
+  let h = `<div class="lab">Ahora</div>`;
+  h += cur ? `<div class="row"><span class="dot"></span><div><div class="t">${esc(cur.ti)}</div><div class="s">${cur.s} – ${cur.e}${cur.sp?" · "+esc(cur.sp):""}</div></div></div>`
+           : `<div class="row"><div><div class="t">Pausa entre actividades</div><div class="s">Visita la feria tecnológica mientras tanto</div></div></div>`;
+  if(nxt){
+    const mins = Math.round((startOf(nxt)-n)/60000);
+    h += `<div class="next">A continuación${mins<=60?" (en "+mins+" min)":""}: <b>${esc(nxt.ti)}</b> · ${nxt.s}</div>`;
+  }
+  if(fav && fav!==nxt){ h += `<div class="next">★ Tu próxima actividad marcada: <b>${esc(fav.ti)}</b> · ${fav.s}</div>`; }
+  const feriaOpen = EV.some(e=>e.feria && startOf(e)<=n && n<endOf(e));
+  if(feriaOpen) h += `<div class="next">La feria tecnológica está abierta hasta las 13:00. ¡No olvides pedir el código de un stand!</div>`;
+  el.innerHTML = h;
+}
+
+/* ===== Accesos rápidos ===== */
+const IC = {
+  user:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg>',
+  chat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg>',
+  cam:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>',
+  link:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M10 14a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 10a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>',
+  star:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7L12 17.6 5.7 21l1.5-7L2 9.3l7-.8z"/></svg>',
+  starO:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.5 7L12 17.6 5.7 21l1.5-7L2 9.3l7-.8z"/></svg>'
+};
+function renderQuick(){
+  const q = [
+    {k:"registro",n:"Regístrate",i:IC.user,off:"El registro se habilita el día del evento"},
+    {k:"whatsapp",n:"Comunidad WhatsApp",i:IC.chat,off:"El enlace se publicará pronto"},
+    {k:"instagram",n:"Instagram",i:IC.cam},
+    {k:"linktree",n:"Más enlaces",i:IC.link}
+  ];
+  $("#quick").innerHTML = q.map(x=> LINKS[x.k]
+    ? `<a class="qa" href="${LINKS[x.k]}" target="_blank" rel="noopener">${x.i}${x.n}</a>`
+    : `<button class="qa off" data-off="${esc(x.off)}">${x.i}${x.n}</button>`).join("");
+  $("#quick").querySelectorAll("[data-off]").forEach(b=>b.onclick=()=>toast(b.dataset.off));
+}
+
+/* ===== Lista ===== */
+const FILTERS = [["todo","Todo"],["charla","Charlas"],["taller","Talleres"],["empresa","Empresas"],["foro","Foro"],["feria","Feria"],["carros","Wireless Car"]];
+function renderFilters(){
+  $("#filters").innerHTML = FILTERS.map(([k,n])=>`<button class="f${filter===k?" on":""}" data-f="${k}">${n}</button>`).join("");
+  $("#filters").querySelectorAll(".f").forEach(b=>b.onclick=()=>{filter=b.dataset.f;renderFilters();renderList()});
+}
+function renderList(){
+  const n = nowEC();
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("on",String(day)===t.dataset.day));
+  let items = day==="fav" ? EV.filter(e=>favs.has(e.id)) : EV.filter(e=>e.d===Number(day));
+  if(filter!=="todo") items = items.filter(e=>e.t===filter);
+  items = sorted(items);
+  if(!items.length){
+    $("#list").innerHTML = `<div class="info">${day==="fav"?"Toca la estrella ☆ de una actividad para armar tu propia agenda.":"No hay actividades de este tipo este día."}</div>`;
+    return;
+  }
+  $("#list").innerHTML = items.map(e=>{
+    const ty = TYPES[e.t], live = startOf(e)<=n && n<endOf(e), past = n>=endOf(e);
+    const dayLbl = day==="fav" ? (e.d===1?"Jue":"Vie")+" · " : "";
+    return `<div class="item${live?" live":""}${past?" past":""}" data-id="${e.id}" role="button" tabindex="0">
+      <div class="time">${e.s}<small>${e.e}</small></div>
+      <div class="bar" style="background:${ty.c}"></div>
+      <div class="body">
+        <span class="tag" style="background:${ty.c}">${ty.n}</span>${live?'<span class="live-pill">EN VIVO</span>':""}
+        <div class="ttl">${dayLbl}${esc(e.ti)}</div>
+        ${e.sp?`<div class="who">${esc(e.sp)}</div>`:""}
+        ${e.par?`<div class="par">${esc(e.par)}</div>`:""}
+      </div>
+      ${e.t!=="log"?`<button class="star${favs.has(e.id)?" on":""}" data-star="${e.id}" aria-label="Marcar">${favs.has(e.id)?IC.star:IC.starO}</button>`:""}
+    </div>`;
+  }).join("");
+  $("#list").querySelectorAll(".item").forEach(it=>{
+    it.onclick = ev => { if(ev.target.closest("[data-star]")) return; openSheet(it.dataset.id); };
+    it.onkeydown = ev => { if(ev.key==="Enter") openSheet(it.dataset.id); };
+  });
+  $("#list").querySelectorAll("[data-star]").forEach(b=>b.onclick=ev=>{
+    ev.stopPropagation(); const id=b.dataset.star;
+    favs.has(id)?favs.delete(id):favs.add(id); store.set("favs",[...favs]);
+    toast(favs.has(id)?"Agregada a Mi agenda":"Quitada de Mi agenda"); renderList(); renderNow();
+  });
+}
+
+/* ===== Detalle ===== */
+function regState(e){
+  const n = nowEC();
+  if(e.feria || e.car){
+    if(n < startOf(e)) return {ok:false,msg:`Se habilita cuando empiece (${e.s})`};
+    if(n > new Date(endOf(e).getTime()+90*60000)) return {ok:false,msg:"El registro de esta actividad ya cerró"};
+    return {ok:true};
+  }
+  const open = new Date(endOf(e).getTime()-5*60000), close = new Date(endOf(e).getTime()+60*60000);
+  if(n < open) return {ok:false,msg:`Se habilita al terminar la actividad (${e.e})`};
+  if(n > close) return {ok:false,msg:"El registro de esta actividad ya cerró"};
+  return {ok:true};
+}
+function asistURL(e){
+  if(!LINKS.asistencia) return "";
+  if(!ASIST_ENTRY) return LINKS.asistencia;
+  const label = (e.d===1?"Jueves":"Viernes")+" "+e.s+" · "+e.ti;
+  const sep = LINKS.asistencia.includes("?")?"&":"?";
+  return LINKS.asistencia+sep+"usp=pp_url&"+ASIST_ENTRY+"="+encodeURIComponent(label);
+}
+function openSheet(id){
+  const e = EV.find(x=>x.id===id), ty = TYPES[e.t], b = BIO[id]||{};
+  let h = `<div class="grab"></div><span class="tag" style="background:${ty.c}">${ty.n}</span>
+    <h3>${esc(e.ti)}</h3><div class="when">${e.d===1?"Jueves 26":"Viernes 27"} de noviembre · ${e.s} – ${e.e}</div>`;
+  if(e.sp && !e.panel){
+    h += `<div class="spk"><div class="av" style="background:${ty.c}">${b.foto?`<img alt="" src="${b.foto}">`:esc(initials(e.sp))}</div>
+      <div><b>${esc(e.sp)}</b><span>${esc(b.cargo||"Ponente")}</span></div></div>`;
+  }
+  if(e.panel) h += `<div class="desc"><b>Panelistas</b></div><ol class="pan">${e.panel.map(p=>`<li>${esc(p)}</li>`).join("")}</ol>`;
+  h += `<div class="desc">${b.resumen?esc(b.resumen):(e.tbc?"Muy pronto anunciaremos esta actividad.":e.feria?"Recorre los stands, conoce los proyectos y conversa con sus equipos. Cada stand tiene un código único: pídelo al terminar tu visita para registrar tu asistencia.":e.car?"Equipos de universidades de todo el país compiten con vehículos a escala controlados de forma inalámbrica, sin línea de vista. El código de asistencia se anuncia por micrófono.":e.t==="log"?(e.par||""):"La información del ponente y el resumen de la charla se publicarán muy pronto.")}</div>`;
+  if(e.key) h += `<div class="hint" style="text-align:left">★ Actividad clave para el certificado.</div>`;
+  if(e.reg){
+    const st = regState(e), url = asistURL(e);
+    if(st.ok && url) h += `<a class="btn pri" href="${url}" target="_blank" rel="noopener">Registrar mi asistencia</a><div class="hint">Ten a mano tu cédula y el código ${e.feria?"del stand":e.car?"anunciado por micrófono":"que aparece en la pantalla"}.</div>`;
+    else if(st.ok) h += `<button class="btn dis" disabled>Registrar mi asistencia</button><div class="hint">El formulario de asistencia estará disponible el día del evento.</div>`;
+    else h += `<button class="btn dis" disabled>Registrar mi asistencia</button><div class="hint">${st.msg}</div>`;
+  }
+  if(e.t!=="log") h += `<button class="btn sec" id="favBtn">${favs.has(id)?"Quitar de Mi agenda":"☆ Agregar a Mi agenda"}</button>`;
+  $("#sheet").innerHTML = h;
+  const fb = $("#favBtn"); if(fb) fb.onclick=()=>{favs.has(id)?favs.delete(id):favs.add(id);store.set("favs",[...favs]);openSheet(id);renderList();renderNow();};
+  $("#sheet").classList.add("on"); $("#bg").classList.add("on");
+}
+function closeSheet(){ $("#sheet").classList.remove("on"); $("#bg").classList.remove("on"); }
+$("#bg").onclick = closeSheet;
+document.addEventListener("keydown",e=>{ if(e.key==="Escape") closeSheet(); });
+
+/* ===== Certificado ===== */
+const REQ = [
+  {k:"c1",n:"Charla, taller o foro #1"},{k:"c2",n:"Charla, taller o foro #2"},{k:"c3",n:"Charla, taller o foro #3"},
+  {k:"key",n:"Una de ellas: Taller de Habilidades Blandas o Leadership Forum"},
+  {k:"feria",n:"Visita a la feria tecnológica (código de un stand)"},
+  {k:"car",n:"Competencia Wireless Car (código por micrófono)"}
+];
+function renderCert(){
+  const c = REQ.filter(r=>done[r.k]).length;
+  $("#cert").innerHTML = `<h2>Tu certificado de participación</h2>
+    <p>Para recibirlo, registra tu asistencia en:</p>
+    <div class="req">${REQ.map(r=>`<button class="rq${done[r.k]?" done":""}" data-k="${r.k}"><span class="ck"></span>${r.n}</button>`).join("")}</div>
+    <div class="progress"><i style="width:${Math.round(c/REQ.length*100)}%"></i></div>
+    <div class="note">Marca lo que ya registraste para llevar tu control. El conteo oficial lo hace la organización con tus registros.</div>`;
+  $("#cert").querySelectorAll(".rq").forEach(b=>b.onclick=()=>{done[b.dataset.k]=!done[b.dataset.k];store.set("done",done);renderCert();});
+}
+
+/* ===== Utilidades ===== */
+let tt; function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(tt);tt=setTimeout(()=>t.classList.remove("on"),2200);}
+
+function pickDay(){
+  if(day) return;
+  const n = nowEC();
+  day = (n >= at(2,"00:00")) ? "2" : "1";
+}
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>{day=t.dataset.day;store.set("day",day);renderList();});
+window.addEventListener("hashchange",()=>{renderNow();renderList();});
+
+pickDay(); renderNow(); renderQuick(); renderFilters(); renderList(); renderCert();
+setInterval(()=>{renderNow();renderList();},30000);
+</script>
+</body>
+</html>
